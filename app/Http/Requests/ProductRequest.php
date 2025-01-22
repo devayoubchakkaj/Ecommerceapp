@@ -21,12 +21,17 @@ class ProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules =  [
             'name'=>'required|min:5',
             'decription'=>'required|min:5',
             'quantity'=>'required|numeric',
-            'image'=>'required|image',
             'price'=>'required|numeric',
         ];
+
+        if($this->route()->getActionMethod()=== 'store'){
+            $rules['image'] = 'required|image';
+        }
+
+        return $rules;
     }
 }

@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container my-5">
         @if($errors->any())
         <div class="alert alert-danger" role="alert">
             <strong>Errors</strong>

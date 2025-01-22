@@ -6,6 +6,7 @@ use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
+
 class ProductController extends Controller
 {
     /**
@@ -22,9 +23,16 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $products = new Product();
+
         $isUpdate = false;
-        return view('product.form',compact('products', 'isUpdate'));
+        $product = new Product();
+        $product->fill(
+            [
+                'quantity'=>0,
+                'price'=>0,
+            ]
+        );
+        return view('product.form',compact( 'product','isUpdate'));
 
     }
 
@@ -55,18 +63,20 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $products = new Product();
         $isUpdate = true;
-        return view('product.form',compact('products', 'isUpdate'));
+        return view('product.form',compact('product', 'isUpdate'));
 
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+
+        $product->fill($request->validated())->save();
+        return to_route('products.index')->with('success','Product Updated successfully');
+
     }
 
     /**

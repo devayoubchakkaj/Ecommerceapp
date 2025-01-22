@@ -30,7 +30,7 @@
       <td><img width="100px" src="storage/{{$product->image}}" alt=""></td>
       <td>{{$product->price}} Mad</td>
       <td>
-        <div class="btn-group">
+        <div class="btn-group gap-2">
             <a href="{{route('products.edit',$product)}}" class="btn btn-primary">Update</a>
             <form action="{{route('products.destroy',$product)}}" method="post">
                 @csrf
